@@ -4,18 +4,21 @@ import {
   GraphQLString
 } from 'graphql';
 
-let schema = new GraphQLSchema({
-  query: new GraphQLObjectType({
-    name: 'RootQueryType',
-    fields: {
-      album: {
-        type: GraphQLString,
-        resolve() {
-          return 'world';
-        }
+import album from './types/album';
+
+let query = new GraphQLObjectType({
+  name: 'Root',
+  fields: {
+    albums: {
+      type: album,
+      resolve() {
+        return {
+          "name": "Greatest Hits",
+          "popularity": "0.73"
+        };
       }
     }
-  })
+  }
 });
 
-export default schema;
+export default new GraphQLSchema({query: query});
