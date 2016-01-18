@@ -1,8 +1,9 @@
 import {
   GraphQLSchema,
   GraphQLObjectType,
-  GraphQLString
+  GraphQLList
 } from 'graphql';
+import fetch from 'node-fetch';
 
 import album from './types/album';
 
@@ -10,12 +11,16 @@ let query = new GraphQLObjectType({
   name: 'Root',
   fields: {
     albums: {
-      type: album,
-      resolve() {
-        return {
-          "name": "Greatest Hits",
-          "popularity": "0.73"
-        };
+      type: new GraphQLList(album),
+      resolve: () => {
+        return fetch('http://ws.spotify.com/search/1/album.json?q=foo')
+          .then(function(res) {
+            console.log('fetch status: %s', res.status);
+            return res.json();
+          })
+          .then(function(json){
+            return json.albums;
+          });
       }
     }
   }

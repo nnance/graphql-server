@@ -6,7 +6,12 @@ import {
 export default new GraphQLObjectType({
   name: 'Album',
   description: 'Albums found on Spotify',
-  fields: {
+  fields: () => ({
+    id: {
+      type: GraphQLString,
+      description: 'The Spotify album href',
+      resolve: (album) => album.href
+    },
     name: {
       type: GraphQLString,
       description: 'The name of the album'
@@ -15,5 +20,5 @@ export default new GraphQLObjectType({
       type: GraphQLString,
       description: 'The overall popularity of the album'
     }
-  }
+  })
 });
