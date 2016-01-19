@@ -1,20 +1,14 @@
-import {
-  GraphQLSchema,
-  GraphQLObjectType,
-  GraphQLList,
-  GraphQLNonNull,
-  GraphQLString
-} from 'graphql';
+import * as graphql from 'graphql';
 import schemaTypes from './schemaTypes';
 import apiHelper from './apiHelper';
 
 
 let albums = {
-  type: new GraphQLList(schemaTypes.album),
+  type: new graphql.GraphQLList(schemaTypes.album),
   args: {
     name: {
       description: 'The name of the album',
-      type: new GraphQLNonNull(GraphQLString)
+      type: new graphql.GraphQLNonNull(graphql.GraphQLString)
     }
   },
   resolve: apiHelper.getAlbums
@@ -25,18 +19,18 @@ let album = {
   args: {
     id: {
       description: 'The id of the album',
-      type: new GraphQLNonNull(GraphQLString)
+      type: new graphql.GraphQLNonNull(graphql.GraphQLString)
     }
   },
   resolve: apiHelper.getAlbum
 };
 
 let artists = {
-  type: new GraphQLList(schemaTypes.artist),
+  type: new graphql.GraphQLList(schemaTypes.artist),
   args: {
     name: {
       description: 'The name of the artist',
-      type: new GraphQLNonNull(GraphQLString)
+      type: new graphql.GraphQLNonNull(graphql.GraphQLString)
     }
   },
   resolve: apiHelper.getArtists
@@ -47,18 +41,18 @@ let artist = {
   args: {
     id: {
       description: 'The id of the artist',
-      type: new GraphQLNonNull(GraphQLString)
+      type: new graphql.GraphQLNonNull(graphql.GraphQLString)
     }
   },
   resolve: apiHelper.getArtist
 };
 
 let tracks = {
-  type: new GraphQLList(schemaTypes.track),
+  type: new graphql.GraphQLList(schemaTypes.track),
   args: {
     name: {
       description: 'The name of the track',
-      type: new GraphQLNonNull(GraphQLString)
+      type: new graphql.GraphQLNonNull(graphql.GraphQLString)
     }
   },
   resolve: apiHelper.getTracks
@@ -69,13 +63,13 @@ let track = {
   args: {
     id: {
       description: 'The id of the track',
-      type: new GraphQLNonNull(GraphQLString)
+      type: new graphql.GraphQLNonNull(graphql.GraphQLString)
     }
   },
   resolve: apiHelper.getTrack
 };
 
-let query = new GraphQLObjectType({
+let query = new graphql.GraphQLObjectType({
   name: 'Root',
   fields: {
     albums: albums,
@@ -87,4 +81,4 @@ let query = new GraphQLObjectType({
   }
 });
 
-export default new GraphQLSchema({query: query});
+export default new graphql.GraphQLSchema({query: query});
