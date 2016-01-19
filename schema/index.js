@@ -1,28 +1,41 @@
 import {
   GraphQLSchema,
   GraphQLObjectType,
-  GraphQLList
+  GraphQLList,
+  GraphQLNonNull,
+  GraphQLString
 } from 'graphql';
-import fetch from 'node-fetch';
+import schemaTypes from './schemaTypes';
+import apiHelper from './apiHelper';
 
-import album from './types/album';
+
+let albums = {
+  type: new GraphQLList(schemaTypes.album),
+  args: {
+    name: {
+      description: 'The name of the album',
+      type: new GraphQLNonNull(GraphQLString)
+    }
+  },
+  resolve: apiHelper.getAlbums
+};
+
+let artists = {
+  type: new GraphQLList(schemaTypes.artist),
+  args: {
+    name: {
+      description: 'The name of the artist',
+      type: new GraphQLNonNull(GraphQLString)
+    }
+  },
+  resolve: apiHelper.getArtists
+};
 
 let query = new GraphQLObjectType({
   name: 'Root',
   fields: {
-    albums: {
-      type: new GraphQLList(album),
-      resolve: () => {
-        return fetch('http://ws.spotify.com/search/1/album.json?q=foo')
-          .then(function(res) {
-            console.log('fetch status: %s', res.status);
-            return res.json();
-          })
-          .then(function(json){
-            return json.albums;
-          });
-      }
-    }
+    albums: albums,
+    artists: artists
   }
 });
 
