@@ -6,6 +6,7 @@
   "repository": "https://github.com/nnance/graphql-server.git",
   "scripts": {
     "start": "node index.js",
+    "watch": "nodemon",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "Nick Nance",
@@ -22,6 +23,7 @@
     "react-dom": "^0.14.6"
   },
   "devDependencies": {
-    "babel-preset-es2015": "^6.3.13"
+    "babel-preset-es2015": "^6.3.13",
+    "nodemon": "^1.8.1"
   }
 }
