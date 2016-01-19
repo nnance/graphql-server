@@ -24,7 +24,15 @@ function getArtists(root, {name}) {
   });
 }
 
+function getTracks(root, {name}) {
+  return sendRequest('http://ws.spotify.com/search/1/track.json?q=' + name)
+  .then(function(json){
+    return json.tracks;
+  });
+}
+
 export default {
   getAlbums: getAlbums,
-  getArtists: getArtists
+  getArtists: getArtists,
+  getTracks: getTracks
 }

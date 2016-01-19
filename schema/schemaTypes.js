@@ -43,7 +43,28 @@ const artist = new GraphQLObjectType({
   })
 });
 
+const track = new GraphQLObjectType({
+  name: 'Track',
+  description: 'Track found on Spotify',
+  fields: () => ({
+    id: {
+      type: GraphQLString,
+      description: 'The Spotify track href',
+      resolve: (track) => track.href
+    },
+    name: {
+      type: GraphQLString,
+      description: 'The name of the track'
+    },
+    popularity: {
+      type: GraphQLString,
+      description: 'The overall popularity of the track'
+    }
+  })
+});
+
 export default {
   album: album,
-  artist: artist
+  artist: artist,
+  track: track
 };

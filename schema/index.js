@@ -31,11 +31,23 @@ let artists = {
   resolve: apiHelper.getArtists
 };
 
+let tracks = {
+  type: new GraphQLList(schemaTypes.track),
+  args: {
+    name: {
+      description: 'The name of the track',
+      type: new GraphQLNonNull(GraphQLString)
+    }
+  },
+  resolve: apiHelper.getTracks
+};
+
 let query = new GraphQLObjectType({
   name: 'Root',
   fields: {
     albums: albums,
-    artists: artists
+    artists: artists,
+    tracks: tracks
   }
 });
 
