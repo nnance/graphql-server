@@ -1,5 +1,6 @@
 import * as graphql from 'graphql';
 
+
 const album = new graphql.GraphQLObjectType({
   name: 'Album',
   description: 'Albums found on Spotify',

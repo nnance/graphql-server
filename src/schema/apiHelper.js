@@ -1,11 +1,13 @@
+import { Console } from 'console';
 import fetch from 'node-fetch';
 
+let logger = new Console(process.stdout, process.stderr);
 
 function sendRequest(url) {
-  console.log('url: %s', url);
+  logger.log('url: %s', url);
   return fetch(url)
   .then(function(res) {
-    console.log('fetch status: %s', res.status);
+    logger.log('fetch status: %s', res.status);
     return res.json();
   });
 }
@@ -59,4 +61,4 @@ export default {
   getArtist: getArtist,
   getTracks: getTracks,
   getTrack: getTrack
-}
+};
